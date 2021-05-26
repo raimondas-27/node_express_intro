@@ -13,10 +13,23 @@ const aboutHtmlPath = path.join(__dirname, "html/about.html");
 app.get("/home", (request, response) => response.sendFile(indexHtmlPath));
 // app.get("/about", (request, response) => response.sendFile(aboutHtmlPath));
 
-//our api
-
+//our all api
 app.get("/api/people", (req, res) => {
    res.json(people);
+})
+
+//get one people api
+app.get("/api/people/:id", (req, res) => {
+   const paramId = req.params.id
+
+   const found = people.find((element) => element.id === paramId)
+
+   if (!found) {
+      res.status(404).json({"errorMsg" : "neteisingai nurodytas id"});
+   }
+   else {
+      res.json(found);
+   }
 })
 
 
