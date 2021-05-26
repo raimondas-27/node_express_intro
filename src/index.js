@@ -3,12 +3,12 @@ const path = require("path");
 
 const app = express();
 const indexHtmlPath = path.join(__dirname, "html/index.html");
-console.log(indexHtmlPath)
+const aboutHtmlPath = path.join(__dirname, "html/about.html");
 
-app.get("/", (request, response) => {
-   // response.send("<h1> Hello world from express</h1>")
-   response.sendFile(indexHtmlPath);
-});
+
+app.get("/home", (request, response) => response.sendFile(indexHtmlPath));
+
+app.get("/about", (request, response) => response.sendFile(aboutHtmlPath));
 
 
 app.listen(4000, () => console.log("server is running"));
