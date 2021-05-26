@@ -1,12 +1,26 @@
 {
   "name": "node_express_intro",
   "version": "1.0.0",
-  "description": "",
+  "description": "everything about express framework",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "R.K.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raimondas-27/node_express_intro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/raimondas-27/node_express_intro/issues"
+  },
+  "homepage": "https://github.com/raimondas-27/node_express_intro#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
