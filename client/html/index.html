@@ -15,7 +15,7 @@
 
    document.getElementById("ppl").addEventListener("click", () => {
       console.log("click")
-      fetch("http://localhost:4000/api/people")
+      fetch("http://localhost:5000/api/people")
       .then(resp => resp.json())
       .then(data => console.log(data))
       .catch(error => console.warn(error))

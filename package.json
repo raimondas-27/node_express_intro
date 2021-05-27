@@ -2,9 +2,9 @@
   "name": "node_express_intro",
   "version": "1.0.0",
   "description": "everything about express framework",
-  "main": "src/index.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon server/index.js"
   },
   "keywords": [],
   "author": "R.K.",
