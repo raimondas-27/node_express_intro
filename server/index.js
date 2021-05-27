@@ -4,8 +4,21 @@ const {people} = require("./js/people");
 
 const app = express();
 
+//middleware - veiksmai vykstantys ar po serverio uzklausu
+//logger
+
+const logger = (request, response, next) => {
+   console.log("logger in action")
+   console.log(`${request.protocol}::/${request.get("host")}${request.originalUrl} on : ${new Date().toLocaleTimeString()}`)
+   next()
+}
+
+//naudoti logger funkcija kaip middleware
+
+app.use(logger)
+
 //routes
-const routePath = path.join(__dirname, "html");
+const routePath = path.join(__dirname,"../client", "html");
 const indexHtmlPath = path.join(__dirname, "../client", "html", "index.html");
 const aboutHtmlPath = path.join(__dirname, "../client", "html", "about.html");
 
