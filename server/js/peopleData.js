@@ -1,4 +1,4 @@
-const peopleData = [
+const people = [
   {
     id: "1",
     name: "Jonas",
@@ -68,4 +68,4 @@ const peopleData = [
 ];
 
 
-module.exports = peopleData
+module.exports = people

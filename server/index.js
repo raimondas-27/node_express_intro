@@ -1,41 +1,44 @@
-const express = require("express");
-const path = require("path");
+// isitraukiam express is npm
+const express = require('express');
+const path = require('path');
 
-
+// sukuriam express app objekta
 const app = express();
 
-//middleware - veiksmai vykstantys ar po serverio uzklausu
-//logger
+// Middle ware -- veiksmai vykstantys pries ar po serverio uzklausu
+// logger
+const logger = (req, res, next) => {
+  console.log(
+    `${req.protocol}://${req.get('host')}${req.originalUrl} on: ${new Date().toLocaleTimeString()}`
+  );
+  next();
+};
 
-const logger = (request, response, next) => {
-   console.log("logger in action")
-   console.log(`${request.protocol}::/${request.get("host")}${request.originalUrl} on : ${new Date().toLocaleTimeString()}`)
-   next()
-}
+// naudoti logger funkcija kaip middle ware
+app.use(logger);
 
-//naudoti logger funkcija kaip middleware
+// json duomenu atkodavimas/istraukimas is http Post rq
+app.use(express.json());
+// kad galetume dirbti su formos duomenimis body dalyje
+app.use(express.urlencoded({ extended: false }));
 
-app.use(logger)
+// current paths
 
-//routes
-const routePath = path.join(__dirname,"../client", "html");
-const indexHtmlPath = path.join(__dirname, "../client", "html", "index.html");
-const aboutHtmlPath = path.join(__dirname, "../client", "html", "about.html");
+const htmlPath = path.join(__dirname, '../client', 'html');
+const indexPath = path.join(__dirname, '../client', 'html', 'index.html');
+const aboutPath = path.join(__dirname, '../client', 'html', 'about.html');
+// console.log(' indexPath', indexPath);
 
-//routes for pages
-app.get("/", (request, response) => response.sendFile(indexHtmlPath));
-app.get("/about", (request, response) => response.sendFile(aboutHtmlPath));
+// routes for pages
+app.get('/', (req, res) => res.sendFile(indexPath));
+app.get('/about', (req, res) => res.sendFile(aboutPath));
 
-//api routes
+// api routes
+app.use('/api/people', require('./routes/api/peopleApi'));
 
-app.use("/api/people", require("./routes/api/peopleApi"))
+// kai turim papke kurios failus norim pasiekti is narsykles pagal pavadinimas
+// nustatom static papke.
+// app.use(express.static(htmlPath));
 
-
-//kai turime papke kurios failus norime pasiekti, is narsykles pagal pavadinimus, nustatome
-//static folderi
-
-app.use(express.static(routePath));
-
-
-app.listen(5000, () => console.log("server is running"));
-
+// paleidzia serveri ir klausosi http ir kt requestu nurodytu portu
+app.listen(5000, () => console.log('server is running'));
