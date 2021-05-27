@@ -9,13 +9,15 @@
 <h1> Express </h1>
 
 <a href="/about"> About </a>
-<button id="ppl"> Get people </button>
+
+<a href="server/routes/api/peopleApi.js"> people API </a>
+<button id="ppl"> Get peopleData </button>
 
 <script>
 
    document.getElementById("ppl").addEventListener("click", () => {
       console.log("click")
-      fetch("http://localhost:5000/api/people")
+      fetch("http://localhost:5000/api/peopleData")
       .then(resp => resp.json())
       .then(data => console.log(data))
       .catch(error => console.warn(error))

@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const {people} = require("./js/people");
+
 
 const app = express();
 
@@ -22,27 +22,13 @@ const routePath = path.join(__dirname,"../client", "html");
 const indexHtmlPath = path.join(__dirname, "../client", "html", "index.html");
 const aboutHtmlPath = path.join(__dirname, "../client", "html", "about.html");
 
-
+//routes for pages
 app.get("/", (request, response) => response.sendFile(indexHtmlPath));
 app.get("/about", (request, response) => response.sendFile(aboutHtmlPath));
 
-//our all api
-app.get("/api/people", (req, res) => {
-   res.json(people);
-})
+//api routes
 
-//get one people api
-app.get("/api/people/:id", (req, res) => {
-   const paramId = req.params.id
-
-   const found = people.find((element) => element.id === paramId)
-
-   if (!found) {
-      res.status(404).json({"errorMsg": "neteisingai nurodytas id"});
-   } else {
-      res.json(found);
-   }
-})
+app.use("/api/people", require("./routes/api/peopleApi"))
 
 
 //kai turime papke kurios failus norime pasiekti, is narsykles pagal pavadinimus, nustatome
